@@ -1,3 +1,7 @@
+data "aws_availability_zones" "available" {}
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+
 resource "random_string" "suffix" {
   length  = 8
   special = false
@@ -11,17 +15,15 @@ locals {
     "managedBy"   = "terraform"
     "application" = "metaflow-eks-example"
   }
-  cluster_name = "mf-${local.resource_suffix}"
+  cluster_name = "metaflow-${local.resource_suffix}"
 }
-
-data "aws_availability_zones" "available" {
-}
-
 
 module "metaflow-datastore" {
-  source  = "outerbounds/metaflow/aws//modules/datastore"
-  version = "0.10.0"
+  # source  = "outerbounds/metaflow/aws//modules/datastore"
+  # version = "0.10.0"
+  source = "../../modules/datastore"
 
+  account_id = data.aws_caller_identity.current.account_id
   force_destroy_s3_bucket = true
 
   resource_prefix = local.resource_prefix
@@ -36,13 +38,15 @@ module "metaflow-datastore" {
 }
 
 module "metaflow-common" {
-  source  = "outerbounds/metaflow/aws//modules/common"
-  version = "0.10.0"
+  # source  = "outerbounds/metaflow/aws//modules/common"
+  # version = "0.10.0"
+  source  = "../../modules/common"
 }
 
 module "metaflow-metadata-service" {
-  source  = "outerbounds/metaflow/aws//modules/metadata-service"
-  version = "0.10.0"
+  # source  = "outerbounds/metaflow/aws//modules/metadata-service"
+  # version = "0.10.0"
+  source  = "../../modules/metadata-service"
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
