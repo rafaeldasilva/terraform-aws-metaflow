@@ -19,9 +19,9 @@ locals {
 }
 
 module "metaflow-datastore" {
-  # source  = "outerbounds/metaflow/aws//modules/datastore"
-  # version = "0.10.0"
-  source = "../../modules/datastore"
+  source  = "outerbounds/metaflow/aws//modules/datastore"
+  version = "0.12.0"
+  # source = "../../modules/datastore"
 
   account_id = data.aws_caller_identity.current.account_id
   force_destroy_s3_bucket = true
@@ -38,15 +38,15 @@ module "metaflow-datastore" {
 }
 
 module "metaflow-common" {
-  # source  = "outerbounds/metaflow/aws//modules/common"
-  # version = "0.10.0"
-  source  = "../../modules/common"
+  source  = "outerbounds/metaflow/aws//modules/common"
+  version = "0.12.0"
+  # source  = "../../modules/common"
 }
 
 module "metaflow-metadata-service" {
-  # source  = "outerbounds/metaflow/aws//modules/metadata-service"
-  # version = "0.10.0"
-  source  = "../../modules/metadata-service"
+  source  = "outerbounds/metaflow/aws//modules/metadata-service"
+  version = "0.12.0"
+  # source  = "../../modules/metadata-service"
 
   resource_prefix = local.resource_prefix
   resource_suffix = local.resource_suffix
