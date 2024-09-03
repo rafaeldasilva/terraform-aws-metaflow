@@ -3,3 +3,7 @@
 terraform.tfstate
 terraform.tfstate.backup
 *.tfplan
+
+# Environment seting files
+kubeconfig_*
+config.json
