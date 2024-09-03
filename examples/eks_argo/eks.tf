@@ -4,7 +4,7 @@ module "eks" {
   version = "17.23.0"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.24"
+  cluster_version = "1.30"
   subnets         = module.vpc.private_subnets
   enable_irsa     = true
   tags            = local.tags
@@ -113,8 +113,6 @@ data "aws_eks_cluster" "cluster" {
 data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_id
 }
-
-data "aws_caller_identity" "current" {}
 
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint
