@@ -39,8 +39,6 @@ resource "kubernetes_default_service_account" "default" {
   }
 }
 
-data "aws_region" "current" {}
-
 locals {
   argo_values = {
     "server" = {
