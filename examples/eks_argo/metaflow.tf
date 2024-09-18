@@ -23,7 +23,7 @@ module "metaflow-datastore" {
   version = "0.12.0"
   # source = "../../modules/datastore"
 
-  account_id = data.aws_caller_identity.current.account_id
+  # account_id = data.aws_caller_identity.current.account_id
   force_destroy_s3_bucket = true
 
   resource_prefix = local.resource_prefix
